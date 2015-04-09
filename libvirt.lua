@@ -16,8 +16,16 @@ require "libvirt-secret"
 require "libvirt-storage"
 require "libvirt-stream"
 
+
 if ffi.os == "Windows" then
 	export.Lib = ffi.load("libvirt-0.dll")
+elseif ffi.os == "Linux" then
+	export.Lib = ffi.load("libvirt.so")
+	local err = export.Lib.virInitialize();
+	if (err ~= 0) then
+		return nil, "could not initialize libvirt";
+	end
 end
 
 return export
+

@@ -1,4 +1,9 @@
-local libvirt = require("libvirt")
+local libvirt, err = require("libvirt")
 
 
-print("Initialize: ", err);
+if (not libvirt) then
+	print(err);
+	return nil;
+end
+
+
