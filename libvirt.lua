@@ -1,3 +1,5 @@
+local ffi = require("ffi")
+
 __VIR_LIBVIRT_H_INCLUDES__ = true;
 
 local export = {}
@@ -14,7 +16,8 @@ require "libvirt-secret"
 require "libvirt-storage"
 require "libvirt-stream"
 
+if ffi.os == "Windows" then
+	export.Lib = ffi.load("libvirt-0.dll")
+end
 
--- load the library
--- retain a reference in a table
 return export
