@@ -4,17 +4,33 @@ __VIR_LIBVIRT_H_INCLUDES__ = true;
 
 local export = {}
 
-require "libvirt-host"
-require "libvirt-domain"
-require "libvirt-domain-snapshot"
-require "libvirt-event"
-require "libvirt-interface"
-require "libvirt-network"
-require "libvirt-nodedev"
-require "libvirt-nwfilter"
-require "libvirt-secret"
-require "libvirt-storage"
-require "libvirt-stream"
+-- Copy one dictionary into another
+local function appendTable(dst, src)
+	if not src then
+		return dst;
+	end
+
+	for key, value in pairs(src) do 
+		dst.key = value;
+	end
+
+	return dst;
+end
+
+-- Load all the definitions, while copying
+-- dictionary values into export table
+appendTable(export, require "libvirt-host");
+appendTable(export, require "libvirt-domain");
+appendTable(export, require "libvirt-domain-snapshot");
+appendTable(export, require "libvirt-event");
+appendTable(export, require "libvirt-interface");
+appendTable(export, require "libvirt-network");
+appendTable(export, require "libvirt-nodedev");
+appendTable(export, require "libvirt-nwfilter");
+appendTable(export, require "libvirt-secret");
+appendTable(export, require "libvirt-storage");
+appendTable(export, require "libvirt-stream");
+appendTable(export, require "virterror");
 
 
 if ffi.os == "Windows" then
