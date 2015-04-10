@@ -262,4 +262,21 @@ int			virConnCopyLastError	(virConnectPtr conn,
                                                  virErrorPtr to);
 ]]
 
+export.GetLastError = export.Lib.virGetLastError;
+export.SaveLastError = export.Lib.virSaveLastError;
+export.ResetLastError = export.Lib.virResetLastError;
+export.ResetError = export.Lib.virResetError;
+export.FreeError = export.Lib.virFreeError;
+
+export.GetLastErrorMessage = export.Lib.virGetLastErrorMessage;
+
+export.ConnGetLastError = export.Lib.virConnGetLastError;
+export.ConnResetLastError = export.Lib.virConnResetLastError;
+export.CopyLastError = export.Lib.virCopyLastError;
+
+export.DefaultErrorFunc = export.Lib.DefaultErrorFunc;
+export.SetErrorFunc = export.Lib.virSetErrorFunc;
+export.ConnSetErrorFunc = export.Lib.virConnSetErrorFunc;
+export.ConnCopyLastError = export.Lib.virConnCopyLastError;
+
 return export;
