@@ -37,10 +37,18 @@ if ffi.os == "Windows" then
 	export.Lib = ffi.load("libvirt-0.dll")
 elseif ffi.os == "Linux" then
 	export.Lib = ffi.load("libvirt.so")
-	local err = export.Lib.virInitialize();
-	if (err ~= 0) then
-		return nil, "could not initialize libvirt";
-	end
+elseif ffi.os == "OSX" then
+	export.Lib = ffi.load("libvirt");
+end
+
+if not export.Lib then
+    return nil, "could not load library, 'libvirt'"
+end
+
+local err = export.Lib.virInitialize();
+
+if (err ~= 0) then
+    return nil, "could not initialize libvirt";
 end
 
 return export
