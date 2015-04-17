@@ -1,4 +1,8 @@
 --[[
+Copyright (C) 2015
+William A Adams
+
+Based On:
 /*
  * libvirt-host.h
  * Summary: APIs for management of hosts
@@ -21,10 +25,6 @@
  * License along with this library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-
- Modified for usage in LuaJIT
- William A Adams
- 2015
 --]]
 
 local ffi = require("ffi")
@@ -529,7 +529,8 @@ int virConnectCompareCPU(virConnectPtr conn,
 
 int virConnectGetCPUModelNames(virConnectPtr conn,
                                const char *arch,
-                               char ***models,
+                               void *,
+//                               char ***models,
                                unsigned int flags);
 
 
