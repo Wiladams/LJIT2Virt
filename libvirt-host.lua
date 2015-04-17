@@ -527,10 +527,10 @@ int virConnectCompareCPU(virConnectPtr conn,
                          const char *xmlDesc,
                          unsigned int flags);
 
+// virarch.c contains arch names
 int virConnectGetCPUModelNames(virConnectPtr conn,
                                const char *arch,
-                               void *,
-//                               char ***models,
+                               char ***models,
                                unsigned int flags);
 
 

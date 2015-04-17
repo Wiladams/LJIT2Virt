@@ -16,6 +16,7 @@ end
 
 local function printCPUModelNames(conn, arch)
 	local flags = 0;
+	print("==== printCPUModelNames ====")
 
 	-- first find out how many there are
 	local err = libvirt.Lib.virConnectGetCPUModelNames(conn,arch,nil,flags);
@@ -25,21 +26,19 @@ local function printCPUModelNames(conn, arch)
 		return false
 	end
 
-	local voidPtr = ffi.new("void*[1]")
-	err = libvirt.Lib.virConnectGetCPUModelNames(conn,arch,voidPtr,flags);
+	--local voidPtr = ffi.new("void*[1]")
+	local modelsArray = ffi.new(ffi.typeof("char **[1]"))
+	err = libvirt.Lib.virConnectGetCPUModelNames(conn,arch,modelsArray,flags);
 	if err < 0 then
 		print("error with virConnectGetCPUModelNames: ", err)
 		return false
 	end
 
-	local modelsPtr = ffi.cast("char ***", voidPtr)
-	local modelsArray = modelsPtr[0]
-	--local modelsArray = ffi.cast(ffi.typeof("char *[?]",err), voidPtr[0]);
 
 	print("Models: ", modelsArray)
 	
 	for i=0,err-1 do
-		local str = modelsArray[i]
+		local str = modelsArray[0][i]
 		if str ~= nil then
 			print("MODEL: ", ffi.string(str))
 		end
@@ -65,7 +64,8 @@ end
 
 printHostName(conn)
 printCPUModelNames(conn, "x86_64")
-printCapabilities(conn);
+printCPUModelNames(conn, "mips")
+--printCapabilities(conn);
 
 libvirt.Lib.virConnectClose(conn);
 
