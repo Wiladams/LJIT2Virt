@@ -495,8 +495,9 @@ int                      virNodeGetCellsFreeMemory(virConnectPtr conn,
                                                    unsigned long long *freeMems,
                                                    int startCell,
                                                    int maxCells);
+]]
 
-
+ffi.cdef[[
 int virConnectIsEncrypted(virConnectPtr conn);
 int virConnectIsSecure(virConnectPtr conn);
 int virConnectIsAlive(virConnectPtr conn);
