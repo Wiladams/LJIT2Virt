@@ -36,7 +36,7 @@ appendTable(export, require "virterror");
 if ffi.os == "Windows" then
 	export.Lib = ffi.load("libvirt-0.dll")
 elseif ffi.os == "Linux" then
-	export.Lib = ffi.load("libvirt.so")
+	export.Lib = ffi.load("/usr/lib/libvirt.so")
 elseif ffi.os == "OSX" then
 	export.Lib = ffi.load("libvirt");
 end
