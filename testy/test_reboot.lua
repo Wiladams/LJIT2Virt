@@ -1,5 +1,5 @@
 -- test_hostconnection.lua
-package.path = package.path..';'..'../lib/virt/?.lua'
+package.path = package.path..';../?.lua'
 
 local Connection = require("hostconnection")
 local Domain = require("domain")

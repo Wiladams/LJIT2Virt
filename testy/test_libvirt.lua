@@ -1,4 +1,4 @@
-package.path = package.path..';'..'../lib/virt/?.lua'
+package.path = package.path..';../?.lua'
 
 local ffi = require("ffi")
 
